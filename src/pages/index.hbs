@@ -1,0 +1,174 @@
+<html lang="ja">
+  <head>
+
+    <!-- 
+      This is the main Handlebars template for the site 
+      - When the user visits the homepage or submits a color the app calls the endpoints in server.js
+      - The server script passes data in here and the Handlebars code builds it into the HTML page
+    -->
+
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Minimal Captioning Tool for Zoom</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <!--     <link rel="canonical" href="{{seo.url}}" />
+    <meta name="description" content="{{seo.description}}" />
+    <meta property="og:title" content="{{seo.title}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{seo.url}}" />
+    <meta property="og:description" content="{{seo.description}}" />
+    <meta property="og:image" content="{{seo.image}}" />
+    <meta name="twitter:card" content="summary" />
+ -->
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the Speech SDK -->
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+
+    <!-- Import the kuromoji.js -->
+    <script src="/kuromoji.js" defer></script>
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+
+        <textarea
+          id="recognizingTextArea"
+          name="recognizingTextArea"
+          class="recognizingTextArea"
+          type="text"
+          cols="100"
+          rows="5"
+          placeholder="認識中の文字列がここに表示されます"
+        ></textarea>
+
+        <!--         <form class="caption" method="post" action="/caption" name="caption"> -->
+        <form method="post" action="/caption" name="caption">
+
+          <div class="form-item">
+            <label for="recognizedTextArea">
+              字幕</label><br />
+            <textarea
+              id="recognizedTextArea"
+              name="captionText"
+              required="required"
+              type="text"
+              cols="100"
+              rows="5"
+              placeholder="認識後の文字列がここに表示されます"
+            ></textarea>
+          </div>
+
+          <div class="form-item">
+            <label for="apiToken">
+              Zoom: APIトークン</label><br />
+            <textarea
+              id="apiToken"
+              name="apiToken"
+              required="required"
+              type="text"
+              cols="100"
+              rows="5"
+              placeholder="API Token"
+            ></textarea>
+          </div>
+
+        </form>
+
+        <div>
+          <button type="button" id="submitCaptionButton">字幕を投稿する</button>
+        </div>
+
+        <div class="config-item">
+          <textarea
+            id="statusTextArea"
+            cols="100"
+            rows="1"
+            disabled
+          ></textarea><br />
+
+          <input
+            type="button"
+            value="音声認識を開始する"
+            id="toggleListeningButton"
+          />
+          <select id="language">
+          </select>
+        </div>
+
+        <div>
+          <textarea
+            id="phrases"
+            type="text"
+            cols="100"
+            rows="5"
+            placeholder="オプション：セミコロンで区切った単語のリスト"
+          ></textarea>
+        </div>
+
+        <div class="config-item">
+          <label for="subscriptionKey">
+            Speech Service: Subscription Key</label><br />
+          <textarea
+            id="subscriptionKey"
+            name="subscriptionKey"
+            required="required"
+            type="text"
+            cols="100"
+            rows="1"
+            placeholder="Subscription Key"
+          ></textarea><br />
+        </div>
+
+        <div class="config-item">
+          <label for="serviceRegion">
+            Speech Service: Service Region</label><br />
+          <textarea
+            id="serviceRegion"
+            name="serviceRegion"
+            required="required"
+            type="text"
+            cols="100"
+            rows="1"
+            placeholder="Service Region"
+          >japaneast</textarea>
+        </div>
+
+        <!-- Instructions on using this project -->
+        <div class="instructions">
+          <h2>
+            使い方
+          </h2>
+          <p>
+            <ol>
+              <li>Speech ServiceのSubscription KeyとService
+                Regionを入力する（これから始める場合は「<a
+                  href="https://docs.microsoft.com/ja-jp/azure/cognitive-services/speech-service/overview#try-the-speech-service-for-free"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Speech Serviceを無料で試す</a>」を参照）</li>
+              <li
+              >Zoomミーティング／ウェビナーでホストがAPIトークンを取得する（<a
+                  href="https://support.zoom.us/hc/ja/articles/115002212983-%E3%82%B5%E3%83%BC%E3%83%89%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%81%AE%E5%AD%97%E5%B9%95%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA#h_4b01d271-eb7b-473d-b82a-f8bb6eb80ba1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >説明</a>）</li>
+              <li>取得したAPIトークンを入力する</li>
+              <li>［音声認識を開始する］ボタンを押す</li>
+
+            </ol>
+            以上で、音声認識が完了する度にZoomに字幕として投稿されるようになります。なお、音声認識を使用せず、［字幕］欄に入力し［字幕を投稿する］ボタンを押すことでも更新できます。また、［認識後に自動で投稿する］のチェックを外すと［字幕を投稿する］ボタンを押さない限り投稿されないようになります。これにより、誤認識を修正した上で投稿できるようになります。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
