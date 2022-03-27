@@ -4,6 +4,10 @@
 
 Microsoft Cognitive ServicesのSpeech Serviceで音声認識したテキストをZoomの字幕として表示する簡易的なツールです。あくまで最小限の機能だけを実装した簡易的なものであり、一般向け公開サービスとして使用されることを想定したものではありません。今後の予定についてはTODO.mdをご覧ください。
 
+### 準備
+
+本ツールを使用するためにはWebサーバが必要です。手軽にWebアプリケーションをつくれるWebサービス「[Glitch](https://glitch.com/)」を利用すると、簡単に使い始めることができます（[説明](https://help.glitch.com/kb/article/20-importing-code-from-github/)）。
+
 ### 使い方
 
 1. Speech ServiceのSubscription KeyとService Regionを入力する（Speech Serviceをはじめて使う場合は「[Speech Serviceを無料で試す](https://docs.microsoft.com/ja-jp/azure/cognitive-services/speech-service/overview#try-the-speech-service-for-free)」を参照）
@@ -19,6 +23,19 @@ Microsoft Cognitive ServicesのSpeech Serviceで音声認識したテキスト�
 - [JavaScript Speech Recognition, Synthesis, and Translation Sample for the Web Browser](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/js/browser)
 - [Cognitive Services Speech SDK for JavaScript](https://docs.microsoft.com/ja-jp/javascript/api/overview/azure/microsoft-cognitiveservices-speech-sdk-readme?view=azure-node-latest)
 
+### 動作確認した環境
+
+- Google Chrome 99.0.4844.83（macOS 12.3）
+
+### 使用しているライブラリ
+
+- [fastify](https://github.com/fastify/fastify)
+- [fastify-static](https://github.com/fastify/fastify-static)
+- [handlebars.js](https://github.com/handlebars-lang/handlebars.js)
+- [point-of-view](https://github.com/fastify/point-of-view)
+- [Microsoft Cognitive Services Speech SDK for JavaScript](https://github.com/microsoft/cognitive-services-speech-sdk-js)
+- [kuromoji.js](https://github.com/takuyaa/kuromoji.js)
+
 ## About this tool
 
 A simple tool to display text recognised by the Speech Service of Microsoft Cognitive Services as subtitles in Zoom. Only the minimum functions are implemented, and it is not intended to be used as a public service for general use. See TODO.md for plans.
@@ -28,6 +45,15 @@ A simple tool to display text recognised by the Speech Service of Microsoft Cogn
 - [Quickstart: Recognize speech in JavaScript on a Web Browser](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/quickstart/javascript/browser/from-microphone)
 - [JavaScript Speech Recognition, Synthesis, and Translation Sample for the Web Browser](https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/js/browser)
 - [Cognitive Services Speech SDK for JavaScript](https://docs.microsoft.com/ja-jp/javascript/api/overview/azure/microsoft-cognitiveservices-speech-sdk-readme?view=azure-node-latest)
+
+### Libraries
+
+- [fastify](https://github.com/fastify/fastify)
+- [fastify-static](https://github.com/fastify/fastify-static)
+- [handlebars.js](https://github.com/handlebars-lang/handlebars.js)
+- [point-of-view](https://github.com/fastify/point-of-view)
+- [Microsoft Cognitive Services Speech SDK for JavaScript](https://github.com/microsoft/cognitive-services-speech-sdk-js)
+- [kuromoji.js](https://github.com/takuyaa/kuromoji.js)
 
 ```mermaid
 sequenceDiagram
