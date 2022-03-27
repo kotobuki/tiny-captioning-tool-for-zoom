@@ -2,5 +2,10 @@
 
 ## 今後の予定
 
-- 長時間連続して稼働させると途中で音声認識が停まってしまう問題をできるだけ解決する
-- 認識の区切りを話者に適切にフィードバックできるような必要最小限の仕組みを考える
+- 長時間連続して稼働させた時に発生する503エラーを解消する
+- Cookieなどの手段によりキーの情報をブラウザに保存できるようにする
+
+## Plans
+
+- Fixes 503 errors during long continuous runs
+- Allow saving of keys' information in a browser by means such as cookies

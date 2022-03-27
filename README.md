@@ -1,8 +1,8 @@
-# 簡易的な Zoom 用字幕作成ツール（Microsoft Cognitive Services 版）
+# 簡易的な Zoom 用字幕作成ツール（Microsoft Cognitive Services版）
 
-Microsoft Cognitive Services で音声認識したテキストを Zoom の字幕として表示する簡易的なツールです。
+Microsoft Cognitive ServicesのSpeech Serviceで音声認識したテキストをZoomの字幕として表示する簡易的なツールです。
 
-あくまで簡易的なもので、かつ内容も整理中であり、一般公開を想定したものではありません。今後の予定については TODO.md をご覧ください。
+あくまで簡易的なもので、かつ内容も整理中であり、一般向け公開サービスを想定したものではありません。今後の予定についてはTODO.mdをご覧ください。
 
 ## 参考にした記事など
 
@@ -12,6 +12,6 @@ Microsoft Cognitive Services で音声認識したテキストを Zoom の字幕
 
 # Minimal captioning tool for Zoom (Microsoft Cognitive Services version)
 
-This is a minimal tool to display text recognized by Microsoft Cognitive Services as captions in Zoom.
+This is a minimal tool to display text recognized by Speech Service from Microsoft Cognitive Services as captions in Zoom.
 
 This is only a minimal tool, and the contents are still under development. Therefore, it is not intended to be used as a public service. Please refer to TODO.md for plans.
