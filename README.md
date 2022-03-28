@@ -4,13 +4,42 @@
 
 音声認識したテキストをZoomの字幕として表示する簡易的なツールです。音声認識を開始すると、認識中のテキストを逐次Webブラウザに表示し、認識が完了する度にZoomの字幕として送信します。Webブラウザの画面をキャプチャして仮想カメラとして会議に参加させることにより、認識中のテキストをほぼリアルタイムで共有できます。なお、あくまで最小限の機能だけを実装した簡易的なものであり、一般向け公開サービスとして使用されることを想定したものではありません。今後の予定についてはTODO.mdをご覧ください。
 
+```mermaid
+sequenceDiagram
+    actor H as Zoomホスト
+    participant O as OBS Studio
+    participant B as Webブラウザ
+    participant HZA as ホストのZoomアプリ
+    participant A as Speech Service
+    participant Z as Zoomサービス
+    participant PZA as 参加者のZoomアプリ
+    actor P as Zoom参加者
+
+    A->>H: Speech Serviceの設定情報を取得
+    HZA->>H: ZoomのAPIトークンを取得
+    H->>B: Speech Serviceの設定情報とZoomのAPIトークンを入力
+    H->>O: 設定し仮想カメラを開始
+    HZA--)B: Zoomの音声を受け取る
+    B--)A: 受け取った音声を送信
+    A--)B: 認識中のテキストを送信
+    B--)O: 認識中のテキストをキャプチャ
+    O--)HZA: 認識中のテキストを仮想カメラの映像として送信
+    HZA--)Z: 送信
+    Z--)PZA: 映像を配信
+    PZA--)P: 認識中のテキスト（仮想カメラの映像として）
+    A--)B: 認識後のテキストを送信
+    B--)Z: 認識後のテキストを字幕として送信
+    Z--)PZA: 字幕を配信
+    PZA--)P: 認識後のテキスト（字幕として）
+```
+
 ### 準備
 
 - Webサーバ：本ツールを使用するためにはWebサーバが必要です。手軽にWebアプリケーションをつくれるWebサービス「[Glitch](https://glitch.com/)」を利用すると、簡単に使い始めることができます（[説明](https://help.glitch.com/kb/article/20-importing-code-from-github/)）。
 - Microsoft Cognitive Services Speech Serviceのサブスクリプション：Speech Serviceを使い始めるには「[Speech Serviceを無料で試す](https://docs.microsoft.com/ja-jp/azure/cognitive-services/speech-service/overview#try-the-speech-service-for-free)」を参照してください。
 - Zoomアプリからブラウザへの音声入力経路：
   - macOSの場合：まず、[BlackHole](https://github.com/ExistentialAudio/BlackHole)の2チャンネル版を導入し、Zoomアプリの［スピーカー］で［BlackHole 2ch］を選択します（同時に内蔵スピーカーなどでも確認したい時は[こちらの記事](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device)で説明されている［複数出力装置］が必要です）。次に、Webブラウザの音声入力に関する設定（Chromeの場合には[chrome://settings/content/microphone](chrome://settings/content/microphone)）で同じく［BlackHole 2ch］を選択します。以上で、Zoomアプリの音声がWebブラウザへ入力されるようになります。
-- 仮想カメラ：Webブラウザの画面キャプチャを仮想カメラとしてZoomミーティング／ウェビナーに参加させるには、ライブストリーミング用ツール「[OBS](https://obsproject.com/)」などを用意し、設定します。
+- 仮想カメラ：Webブラウザの画面キャプチャを仮想カメラとしてZoomミーティング／ウェビナーに参加させるには、ライブストリーミング用ツール「[OBS Studio](https://obsproject.com/)」などを用意し、設定します。
 
 ### 使い方
 
@@ -61,7 +90,7 @@ A tiny tool for displaying speech-recognized text as subtitles in Zoom. Once you
 ```mermaid
 sequenceDiagram
     actor H as Zoom host
-    participant O as OBS
+    participant O as OBS Studio
     participant B as Web Browser
     participant S as Web Server
     participant A as Azure Speech Service
